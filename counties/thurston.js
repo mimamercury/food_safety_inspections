@@ -48,11 +48,12 @@ function format_data (results) {
     const first_row = results[0]
     data.metadata.columns = first_row.table.keys
 
-    for (const { table } of results) {
-        const row = {}
+    for (const { header, table } of results) {
+        const row = {
+            ...header
+        }
 
         for (const [index, value] of Object.entries(table.values)) {
-            console.log(table.keys, index, table.keys[index])
             const key = table.keys[index].key
 
             if (!row[key]) {
@@ -62,9 +63,9 @@ function format_data (results) {
                     row[key] = value
                 }
             }
-
-            data.rows.push(row)
         }
+
+        data.rows.push(row)
     }
 
     check(data)
@@ -90,6 +91,8 @@ function check (data) {
             title: 'food_safety_inspection_rows',
             required: ['permit_type', 'inspection_date', 'red_points', 'blue_points', 'tital_points', 'deficiencies', 'inspection_notes'],
             properties: {
+                establishment: { type: 'string' },
+                partial_address: { type: 'string' },
                 permit_type: { type: 'string' },
                 inspection_date: { type: 'string' }, 
                 red_points: { type: 'number' },
