@@ -1,4 +1,4 @@
-import { chromium } from 'playwright'
+import { chromium } from 'playwright-chromium'
 import Ajv from 'ajv'
 
 // export async function on_load (page, { timeout = 10000 } = {}) {
