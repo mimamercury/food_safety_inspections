@@ -28,8 +28,8 @@ jobs:
         command: node counties/thurston.js
     - name: Commit new data
       run: |-
-        git config user.name "Mima Mercury"
-        git config user.email "hi@mimamercury.com"
+        git config user.name "sethvincent"
+        git config user.email "sethvincent@gmail.com"
         git add -A
         download_date=$(date -u)
         git commit -m "Thurston data: ${download_date} on-behalf-of: @mimamercury hi@mimamercury.com" || exit 0
