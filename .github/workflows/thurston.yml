@@ -18,6 +18,8 @@ jobs:
         node-version: '20'
     - name: Install npm deps
       run: npm install
+    - name: Set up playwright
+      run:  npx playwright install
     - name: Download
       uses: nick-invision/retry@v2
       with:
