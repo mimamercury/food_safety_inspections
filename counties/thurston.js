@@ -35,11 +35,6 @@ async function download (page) {
 }
 
 function format_data (results) {
-// TODO: reshape output
-// - { metadata: {}, rows: [] }
-// - put key: label hash in metadata
-// - map keys to values in each row
-// - convert ints and dates where appropriate in each row
     const data = {
         metadata: {},
         rows: []
