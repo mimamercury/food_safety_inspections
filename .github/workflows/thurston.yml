@@ -1,0 +1,26 @@
+# name: Download Thurston food safety inspection data
+
+# on:
+#   workflow_dispatch:
+#   schedule:
+#     - cron:  '0 4 * * *'
+# jobs:
+#   download:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - name: Setup timezone
+#       uses: zcong1993/setup-timezone@master
+#       with:
+#         timezone: America/Los_Angeles
+#     - uses: actions/checkout@v2
+#     - uses: actions/setup-node@v2
+#       with:
+#         node-version: 'latest'
+#     - name: Install npm deps
+#       run: npm install
+#     - name: Download
+#       uses: nick-invision/retry@v2
+#       with:
+#         timeout_minutes: 360
+#         max_attempts: 3
+#         command: node counties/thurston.js
