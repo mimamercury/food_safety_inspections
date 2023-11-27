@@ -1,16 +1,6 @@
 import { chromium } from 'playwright-chromium'
 import Ajv from 'ajv'
 
-// export async function on_load (page, { timeout = 10000 } = {}) {
-//     return new Promise(async (resolve, reject) => {
-//         // setTimeout(() => {
-//         //     reject(`Timeout on page load: ${timeout}`)
-//         // }, timeout)
-
-//         // page.once('load', resolve)
-//     })
-// }
-
 export async function get ({ url, headless = true }) {
     const browser = await chromium.launch({ headless })
     const context = await browser.newContext()

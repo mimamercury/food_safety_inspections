@@ -4,6 +4,7 @@ import * as dirname from '@editorialapp/datatools/dirname'
 import { slugify } from '@editorialapp/datatools/text'
 import { writeJson } from '@editorialapp/datatools/json'
 import { get, multi_error, check_schema } from '../utilities.js'
+import * as schemas from '../schemas/thurston.js'
 
 const url = 'https://www.co.thurston.wa.us/apps/eh-food-inspections/index.asp?mod=third'
 const thurston_data_directory = dirname.join(import.meta.url, '../data/thurston')
@@ -71,32 +72,14 @@ function check (data) {
     const { rows, metadata } = data
     const errors = []
 
-    const valid = check_schema(metadata, {
-        title: 'food_safety_inspection_metadata',
-        required: ['columns'],
-
-    })
+    const valid = check_schema(metadata, schemas.food_safety_inspection_metadata)
 
     if (!valid) {
         errors = [...valid.errors]
     }
 
     for (const row of rows) {
-        const valid = check_schema(row, {
-            title: 'food_safety_inspection_rows',
-            required: ['permit_type', 'inspection_date', 'red_points', 'blue_points', 'tital_points', 'deficiencies', 'inspection_notes'],
-            properties: {
-                establishment: { type: 'string' },
-                partial_address: { type: 'string' },
-                permit_type: { type: 'string' },
-                inspection_date: { type: 'string' }, 
-                red_points: { type: 'number' },
-                blue_points: { type: 'number' },
-                total_points: { type: 'number' },
-                deficiencies: { type: 'string' }, 
-                inspection_notes: { type: 'string' }
-            }
-        })
+        const valid = check_schema(row, schemas.food_safety_inspection_rows)
 
         if (valid.errors && valid.errors.length) {
             errors = [errors, ...valid.errors]
