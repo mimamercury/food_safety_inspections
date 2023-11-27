@@ -17,4 +17,16 @@ export const food_safety_inspection_rows = {
 export const food_safety_inspection_metadata = {
     title: 'food_safety_inspection_metadata',
     required: ['columns'],
+    properties: {
+        columns: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    key: { type: 'string' },
+                    label: { type: 'string' }
+                }
+            }
+        }
+    }
 }
