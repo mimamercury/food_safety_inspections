@@ -15,6 +15,9 @@ const date = format(today, 'yyyy_MM_dd_hh_mm_ss')
 const filename = `thurston_food_inspections_${date}.json`
 const filepath = path.join(thurston_data_directory, filename)
 
+const latest_filename = `latest_thurston.json`
+const latest_filepath = path.join(thurston_data_directory, latest_filename)
+
 const { page, browser } = await get({ url })
 
 async function download (page) {
@@ -43,6 +46,7 @@ function format_data (results) {
 
     const first_row = results[0]
     data.metadata.columns = first_row.table.keys
+    data.metadata.date = new Date(today).toISOString()
 
     for (const { header, table } of results) {
         const row = {
@@ -95,6 +99,8 @@ function check (data) {
 
 const results = format_data((await download(page)))
 await writeJson(filepath, results, { minify: false })
+await writeJson(latest_filepath, results)
+
 await browser.close()
 
 function parse_header (header) {
