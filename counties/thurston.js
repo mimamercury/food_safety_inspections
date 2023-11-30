@@ -47,7 +47,8 @@ function format_data (results) {
     const first_row = results[0]
     data.metadata.columns = [
         { key: 'establishment', label: 'Establishment' },
-        { key: 'partial_address', label: 'Address' }
+        { key: 'partial_address', label: 'Address' },
+        ...first_row.table.keys
     ]
     data.metadata.date = new Date(today).toISOString()
 
