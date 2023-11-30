@@ -46,6 +46,7 @@ function format_data (results) {
 
     const first_row = results[0]
     data.metadata.columns = [
+        { key: 'id', label: 'Id' },
         { key: 'establishment', label: 'Establishment' },
         { key: 'partial_address', label: 'Address' },
         ...first_row.table.keys
@@ -66,6 +67,10 @@ function format_data (results) {
                 } else {
                     row[key] = value
                 }
+            }
+
+            if (!row.id) {
+                row.id = slugify(`${row.establishment}_${row.partial_address}`)
             }
         }
 
