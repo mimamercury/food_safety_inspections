@@ -4,8 +4,13 @@ on:
   workflow_dispatch:
   schedule:
     - cron:  '0 4 * * *'
+
 permissions:
   contents: write
+
+env:
+  TZ: "America/Los_Angeles"
+
 jobs:
   download:
     runs-on: ubuntu-latest
